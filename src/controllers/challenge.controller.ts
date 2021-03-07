@@ -16,21 +16,26 @@ export class ChallengeController extends BaseController {
             'description',
         ]);
 
+        if(this.message.member.roles.cache.some(role => role.name === "Admin")){
+
         const author = await User.registerOrFindOne(this.message.author.id, this.server);
 
-        try {
-            const challenge = await ChallengeHandler.create(
-                +args.level,
-                args.title,
-                args.description,
-                author,
-                this.server,
-            );
+            try {
+                const challenge = await ChallengeHandler.create(
+                    +args.level,
+                    args.title,
+                    args.description,
+                    author,
+                    this.server,
+                );
 
-            const ctfId = toHex(challenge.id);
-            this.message.channel.send(`CTF ${ctfId}: ${args.title} created by <@${author.userId}>. Please set the flag to start the challenge.`);
-        } catch (error) {
-            this.message.channel.send(`Unable to create challenge: ${error.message}`);
+                const ctfId = toHex(challenge.id);
+                this.message.channel.send(`CTF ${ctfId}: ${args.title} created by <@${author.userId}>. Please set the flag to start the challenge.`);
+            } catch (error) {
+                this.message.channel.send(`Unable to create challenge: ${error.message}`);
+            }
+        }else{
+            this.message.channel.send('You do not have permission to create a challenge');
         }
     }
 
