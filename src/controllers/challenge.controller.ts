@@ -173,27 +173,35 @@ export class ChallengeController extends BaseController {
     }
 
     info = async (): Promise<void> => {
-        const args = this.getArgs(['id']);
-        const challengeId = this.parseChallengeId(args.id);
 
-        const challenge = await Challenge.getByGuild(challengeId, this.message.guild.id);
-        if (!challenge) {
-            this.message.channel.send(`Challenge ${args.id} does not exist.`);
-            return;
+
+        if(this.message.channel.id === '806505078034137119'){
+        
+
+            const args = this.getArgs(['id']);
+            const challengeId = this.parseChallengeId(args.id);
+
+            const challenge = await Challenge.getByGuild(challengeId, this.message.guild.id);
+            if (!challenge) {
+                this.message.channel.send(`Challenge ${args.id} does not exist.`);
+                return;
+            }
+
+            let author = this.message.client.users.cache.get(challenge.author.userId);
+            if (!author) {
+                author = await this.message.client.users.fetch(challenge.author.userId);
+            }
+
+            const embed = createEmbed()
+                .setAuthor(author.username, author.avatarURL())
+                .setTitle(`CTF ${args.id}: ${challenge.title}`)
+                .setDescription(challenge.description)
+                .addField('Difficulty', `Level ${challenge.level}`, true)
+                .addField('Solvers', challenge.answers.length, true);
+
+            this.message.channel.send(embed);
+        }else{
+            this.message.channel.send('Command not allowed in this channel. Please do this in #info')
         }
-
-        let author = this.message.client.users.cache.get(challenge.author.userId);
-        if (!author) {
-            author = await this.message.client.users.fetch(challenge.author.userId);
-        }
-
-        const embed = createEmbed()
-            .setAuthor(author.username, author.avatarURL())
-            .setTitle(`CTF ${args.id}: ${challenge.title}`)
-            .setDescription(challenge.description)
-            .addField('Difficulty', `Level ${challenge.level}`, true)
-            .addField('Solvers', challenge.answers.length, true);
-
-        this.message.channel.send(embed);
     }
 }
