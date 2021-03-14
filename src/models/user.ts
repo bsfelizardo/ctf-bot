@@ -3,6 +3,7 @@ import {
     Entity,
     OneToMany,
     ManyToMany,
+    getConnection,
 } from 'typeorm';
 import { DefaultEntity } from '@decorators';
 import { Answer } from './answer';
@@ -49,5 +50,13 @@ export class User extends DefaultEntity {
         }
 
         return user;
+    }
+    static async deleteUser(userId : string){
+        await getConnection()
+        .createQueryBuilder()
+        .delete()
+        .from('user')
+        .where("user.userId = :userId",{userId})
+        .execute();
     }
 }

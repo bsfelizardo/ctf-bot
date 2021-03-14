@@ -37,6 +37,7 @@ export class BotController {
             [Command.INFO]: this.challenge.info,
             [Command.DELETE]: this.challenge.delete,
             [Command.HELP]: this.help,
+            [Command.DELETEUSER]: this.server.deleteUser
         };
 
         if (!(command in mapping)) {

@@ -1,4 +1,4 @@
-import { Server } from '@models';
+import { Server,User } from '@models';
 import { ChallengeHandler, UserHandler, ServerHandler } from '@handlers';
 import { BaseController } from './base.controller';
 import { createEmbed, regex } from '@utils';
@@ -73,5 +73,19 @@ export class ServerController extends BaseController {
             .setDescription(ranking);
 
         channel.send(embed);
+    }
+
+    deleteUser = async(): Promise<void> => {
+        try{
+            const args = this.getArgs(['userId']);
+            const userId = args.userId.slice(3,-1);
+
+            await User.deleteUser(userId);
+            this.message.channel.send(`<@${userId}> has been removed from the leaderboard`);
+            return;
+        }catch{
+            this.message.channel.send("Unable to remove user");
+            return;
+        }
     }
 }
