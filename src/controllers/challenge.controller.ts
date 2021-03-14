@@ -92,36 +92,44 @@ export class ChallengeController extends BaseController {
     }
 
     submit = async (): Promise<void> => {
+
         this.message.delete(); // delete flag immediately
 
-        const args = this.getArgs(['id', 'flag']);
-        const challengeId = this.parseChallengeId(args.id);
+        // if(this.message.channel.id === "812329112680398889"){
+        if(this.message.channel.id === "817315815979745290"){
 
-        const flag = this.parseFlag(args.flag);
-        const user = await User.registerOrFindOne(this.message.author.id, this.server);
 
-        const challenge = await Challenge.getByGuild(challengeId, this.message.guild.id);
-        if (!challenge) {
-            this.message.channel.send(`<@${user.userId}> Challenge ${args.id} does not exist.`);
-            return;
-        }
+                const args = this.getArgs(['id', 'flag']);
+                const challengeId = this.parseChallengeId(args.id);
 
-        if (challenge.author.id === user.id) {
-            this.message.channel.send(`<@${user.userId}> You cannot answer your submitted challenge.`);
-            return;
-        }
+                const flag = this.parseFlag(args.flag);
+                const user = await User.registerOrFindOne(this.message.author.id, this.server);
 
-        try {
-            const answer = await ChallengeHandler.submit(challenge, flag, user);
-            const embed = createEmbed()
-                .setTitle(`A user has captured the flag for challenge ${args.id}`)
-                .setDescription(`<@${user.userId}> has captured the flag for challenge ${args.id} and gained ${answer.score} points!`)
-                .setTimestamp();
+                const challenge = await Challenge.getByGuild(challengeId, this.message.guild.id);
+                if (!challenge) {
+                    this.message.channel.send(`<@${user.userId}> Challenge ${args.id} does not exist.`);
+                    return;
+                }
 
-            this.message.channel.send(embed);
-            this.updateLeaderboard();
-        } catch (error) {
-            this.message.channel.send(error.message);
+                if (challenge.author.id === user.id) {
+                    this.message.channel.send(`<@${user.userId}> You cannot answer your submitted challenge.`);
+                    return;
+                }
+
+                try {
+                    const answer = await ChallengeHandler.submit(challenge, flag, user);
+                    const embed = createEmbed()
+                        .setTitle(`A user has captured the flag for challenge ${args.id}`)
+                        .setDescription(`<@${user.userId}> has captured the flag for challenge ${args.id} and gained ${answer.score} points!`)
+                        .setTimestamp();
+
+                    this.message.channel.send(embed);
+                    this.updateLeaderboard();
+                } catch (error) {
+                    this.message.channel.send(error.message);
+            }
+        }else{
+            this.message.channel.send("You can only submit flag in the #flag-submssion");
         }
     }
 
