@@ -103,8 +103,9 @@ export class ChallengeHandler {
          * 7th to 15th: 80% score
          * 16th and beyod: 70% score
          */
-        const tiers = [2, 6, 15, Infinity];
-        const multipliers = [1, 0.9, 0.8, 0.7];
+        const tiers = [1, 2, 3, Infinity];
+        // const multipliers = [1, 0.9, 0.8, 0.7];
+        const multipliers = [1, 0.6, 0.45,0];
 
         const solverTier = tiers.findIndex(tier => solvers < tier);
         return Math.floor(multipliers[solverTier] * basePoint);

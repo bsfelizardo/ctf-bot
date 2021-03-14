@@ -36,7 +36,8 @@ export class Challenge extends DefaultEntity {
     answers: Answer[];
 
     getBasePoint(): number {
-        const points = [10, 25, 50, 80, 100];
+        // const points = [10, 25, 50, 80, 100];
+        const points = [60, 120, 180];
         return points[this.level - 1];
     }
 
