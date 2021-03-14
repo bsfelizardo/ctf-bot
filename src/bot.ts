@@ -5,6 +5,9 @@ import { Command, Secrets } from './constants';
 
 class CtfBot {
     static NAMESPACE = '-ctf';
+    static FLAG = '[fF][lL][aA][gG]'
+    // static FLAG = 'flag';
+    
 
     private client: Client = new Client();
 
@@ -19,14 +22,23 @@ class CtfBot {
 
         this.client.on('message', (message: Message) => {
             const pattern = new RegExp(`^${CtfBot.NAMESPACE} (.+)`);
+            const flag_pattern = new RegExp(`${CtfBot.FLAG}`);
+            const authorId = '817929226304880660';
+            
+     
+            if ( !pattern.test(message.content) && flag_pattern.test(message.content) && authorId !== message.author.id){
+                message.delete();
+                return;
+            }
 
             if (!pattern.test(message.content)) return;
+            
 
             const [, text] = message.content.match(pattern);
             message.content = text;
-
+            
             const [, command] = text.match(regex.COMMAND);
-
+            
             const bot = new BotController(message);
             bot.handle(command as Command);
         });
