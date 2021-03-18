@@ -2,6 +2,7 @@ import { Server,User } from '@models';
 import { ChallengeHandler, UserHandler, ServerHandler } from '@handlers';
 import { BaseController } from './base.controller';
 import { createEmbed, regex } from '@utils';
+import { ChallengeController} from './challenge.controller';
 
 export enum ServerCommand {
     CHANNEL = 'channel',
@@ -61,7 +62,7 @@ export class ServerController extends BaseController {
     getLeaderboard = async (): Promise<void> => {
         const { channel } = this.message;
         const leaderboard = await UserHandler.getLeaderboard(this.server);
-
+        
         if (!leaderboard.length) {
             channel.send('No data for leaderboard yet.');
             return;
@@ -82,6 +83,11 @@ export class ServerController extends BaseController {
 
             await User.deleteUser(userId);
             this.message.channel.send(`<@${userId}> has been removed from the leaderboard`);
+            
+            // Updates the leaderboard
+            const leaderboard = await UserHandler.getLeaderboard(this.server);
+            await this.loadAnnouncement();
+            this.announce({ leaderboard });
             return;
         }catch{
             this.message.channel.send("Unable to remove user");
