@@ -105,7 +105,7 @@ export class ChallengeHandler {
          */
         const tiers = [1, 2, 3, Infinity];
         // const multipliers = [1, 0.9, 0.8, 0.7];
-        const multipliers = [1, 0.6, 0.45,0];
+        const multipliers = [1, 0.7, 0.45,0];
 
         const solverTier = tiers.findIndex(tier => solvers < tier);
         return Math.floor(multipliers[solverTier] * basePoint);
