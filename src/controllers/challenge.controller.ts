@@ -95,7 +95,7 @@ export class ChallengeController extends BaseController {
 
         this.message.delete(); // delete flag immediately
 
-        // if(this.message.channel.id === "812329112680398889"){
+        // if(this.message.channel.id === "822115248974331974"){
         if(this.message.channel.id === "817315815979745290"){
 
 

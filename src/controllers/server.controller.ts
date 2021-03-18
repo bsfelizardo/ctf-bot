@@ -82,13 +82,18 @@ export class ServerController extends BaseController {
             const userId = args.userId.slice(3,-1);
 
             await User.deleteUser(userId);
-            this.message.channel.send(`<@${userId}> has been removed from the leaderboard`);
-            
+
             // Updates the leaderboard
             const leaderboard = await UserHandler.getLeaderboard(this.server);
             await this.loadAnnouncement();
-            this.announce({ leaderboard });
-            return;
+            
+            this.announce({ leaderboard},true);
+            
+            this.message.channel.send(`<@${userId}> has been removed from the leaderboard`);
+            
+            
+            
+            // return;
         }catch{
             this.message.channel.send("Unable to remove user");
             return;
