@@ -17,8 +17,6 @@ services:
     ctf-db:
       image: mysql:5.7
       container_name: ctf-db
-      ports:
-        - "3001:3001"
       command: --init-file /mnt/init.sql
       environment:
           MYSQL_DATABASE: 'ctf'
