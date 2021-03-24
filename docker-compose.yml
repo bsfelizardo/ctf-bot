@@ -1,0 +1,31 @@
+version : '3'
+services:
+    ctf-bot:
+      build:
+          context: .
+          dockerfile: Dockerfile
+      image: ctf:bot
+      container_name: ctf-bot
+      ports: 
+          - "8081:8081"
+      volumes: 
+          - .:/mnt/ctf-bot
+      working_dir: /mnt/ctf-bot
+      depends_on:
+        - ctf-db
+    
+    ctf-db:
+      image: mysql:5.7
+      container_name: ctf-db
+      ports:
+        - "3001:3001"
+      command: --init-file /mnt/init.sql
+      environment:
+          MYSQL_DATABASE: 'ctf'
+          MYSQL_USER: 'ctf'
+          MYSQL_PASSWORD: 'ctf'
+          MYSQL_ROOT_PASSWORD: 'root'
+      volumes:
+          - ./src/config/database.sql:/mnt/init.sql
+          - ./migrations:/mnt/db-migrations
+          - ./.mysql:/var/lib/mysql
