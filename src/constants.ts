@@ -40,17 +40,29 @@ export enum Command {
 };
 
 export const CommandUsage = [
+    // {
+    //     command: 'ping',
+    //     description: 'Check bot availability',
+    // },
+    // {
+    //     command: 'create <level> <title> <description>',
+    //     description: 'Create new CTF challenge',
+    // },
+    // {
+    //     command: 'set-flag <ctf-id> <flag>',
+    //     description: 'Set flag to a given challenge',
+    // },
     {
-        command: 'ping',
-        description: 'Check bot availability',
+        command: 'help',
+        description: 'Show this help message',
     },
     {
-        command: 'create <level> <title> <description>',
-        description: 'Create new CTF challenge',
+        command: 'info <ctf-id>',
+        description: 'Show info on a given challenge',
     },
     {
-        command: 'set-flag <ctf-id> <flag>',
-        description: 'Set flag to a given challenge',
+        command: 'list',
+        description: 'List CTF challenges',
     },
     {
         command: 'submit <ctf-id> <flag>',
@@ -60,22 +72,12 @@ export const CommandUsage = [
         command: 'leaderboard',
         description: 'Show leaderboard',
     },
-    {
-        command: 'list',
-        description: 'List CTF challenges',
-    },
-    {
-        command: 'info <ctf-id>',
-        description: 'Show info on a given challenge',
-    },
-    {
-        command: 'delete <ctf-id>',
-        description: 'Delete CTF challenge',
-    },
-    {
-        command: 'help',
-        description: 'Show this help message',
-    },
+    
+    // {
+    //     command: 'delete <ctf-id>',
+    //     description: 'Delete CTF challenge',
+    // },
+    
 ];
 
 export enum Color {
