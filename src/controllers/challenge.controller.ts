@@ -96,7 +96,7 @@ export class ChallengeController extends BaseController {
         this.message.delete(); // delete flag immediately
 
         // if(this.message.channel.id === "822115248974331974"){
-        if(this.message.channel.id === "817315815979745290"){
+        if(this.message.channel.id === "839500817216438322"){
 
 
                 const args = this.getArgs(['id', 'flag']);
@@ -183,7 +183,7 @@ export class ChallengeController extends BaseController {
     info = async (): Promise<void> => {
 
 
-        if(this.message.channel.id === '806505078034137119'){
+        if(this.message.channel.id === '839500750924415036'){
         
 
             const args = this.getArgs(['id']);
