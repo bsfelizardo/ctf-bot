@@ -29,7 +29,7 @@ export class ChallengeHandler {
 
     static setFlag = async (challenge: Challenge, flag: string): Promise<Challenge> => {
         if (!ChallengeHandler.FLAG_REGEX.test(flag)) {
-            throw new BotError(ErrorCode.INVALID_INPUT, 'Invalid flag format.');
+            throw new BotError(ErrorCode.INVALID_INPUT, 'Invalid flag format.\n Proper flag format: -ctf submit <challenge-id> flag{<flag>}');
         }
 
         challenge.flag = flag;
@@ -103,9 +103,9 @@ export class ChallengeHandler {
          * 7th to 15th: 80% score
          * 16th and beyod: 70% score
          */
-        const tiers = [1, 2, 3, Infinity];
+        const tiers = [1, 3, 7, 15, Infinity];
         // const multipliers = [1, 0.9, 0.8, 0.7];
-        const multipliers = [1, 0.7, 0.45,0];
+        const multipliers = [1, 0.9, 0.8, 0.7, 0.5];
 
         const solverTier = tiers.findIndex(tier => solvers < tier);
         return Math.floor(multipliers[solverTier] * basePoint);
