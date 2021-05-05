@@ -77,26 +77,30 @@ export class ServerController extends BaseController {
     }
 
     deleteUser = async(): Promise<void> => {
-        try{
-            const args = this.getArgs(['userId']);
-            const userId = args.userId.slice(3,-1);
+        if(this.message.member.roles.cache.some(role => role.name === "Admin")){
+            try{
+                const args = this.getArgs(['userId']);
+                const userId = args.userId.slice(3,-1);
 
-            await User.deleteUser(userId);
+                await User.deleteUser(userId);
 
-            // Updates the leaderboard
-            const leaderboard = await UserHandler.getLeaderboard(this.server);
-            await this.loadAnnouncement();
-            
-            this.announce({ leaderboard},true);
-            
-            this.message.channel.send(`<@${userId}> has been removed from the leaderboard`);
-            
-            
-            
-            // return;
-        }catch{
-            this.message.channel.send("Unable to remove user");
-            return;
+                // Updates the leaderboard
+                const leaderboard = await UserHandler.getLeaderboard(this.server);
+                await this.loadAnnouncement();
+                
+                this.announce({ leaderboard},true);
+                
+                this.message.channel.send(`<@${userId}> has been removed from the leaderboard`);
+                
+                
+                
+                // return;
+            }catch{
+                this.message.channel.send("Unable to remove user");
+                return;
+            }
+        }else{
+            this.message.channel.send('You do not have permission to remove a user');
         }
     }
 }
