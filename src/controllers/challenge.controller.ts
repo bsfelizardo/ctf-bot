@@ -209,7 +209,7 @@ export class ChallengeController extends BaseController {
 
             this.message.channel.send(embed);
         }else{
-            this.message.channel.send('Command not allowed in this channel. Please do this in #info')
+            this.message.channel.send('Command not allowed in this channel. Please do this in #challenge-info')
         }
     }
 }
