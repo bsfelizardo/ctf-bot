@@ -72,7 +72,8 @@ export abstract class BaseController {
 
     parseFlag = (flag: string): string => {
         if (!pattern.FLAG.test(flag)) {
-            const error = 'Invalid flag format.';
+            console.log(flag)
+            const error = 'Invalid flag format.\nProper flag submission: `-ctf submit <challenge-id> flag{<flag>}`.\nVisit `#help` for more details.';
 
             this.messageAuthor(error);
             throw new BotError(ErrorCode.INVALID_INPUT, error);

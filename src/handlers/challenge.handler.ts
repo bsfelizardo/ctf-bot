@@ -29,7 +29,7 @@ export class ChallengeHandler {
 
     static setFlag = async (challenge: Challenge, flag: string): Promise<Challenge> => {
         if (!ChallengeHandler.FLAG_REGEX.test(flag)) {
-            throw new BotError(ErrorCode.INVALID_INPUT, 'Invalid flag format.\n Proper flag format: -ctf submit <challenge-id> flag{<flag>}');
+            throw new BotError(ErrorCode.INVALID_INPUT, 'Invalid flag format.');
         }
 
         challenge.flag = flag;
