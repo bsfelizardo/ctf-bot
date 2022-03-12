@@ -20,6 +20,8 @@ services:
           MYSQL_USER: 'ctf'
           MYSQL_PASSWORD: 'ctf'
           MYSQL_ROOT_PASSWORD: 'root'
+      ports:
+            - "3306:3306"
       volumes:
           - ./src/config/database.sql:/mnt/init.sql
           - ./migrations:/mnt/db-migrations
