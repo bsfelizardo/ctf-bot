@@ -7,6 +7,7 @@ import { ServerGuard } from '@guards';
 import { createEmbed } from '@utils';
 import { mention } from '@utils/discord';
 import { CommandUsage, Command } from '../constants';
+import { isRFC3339 } from 'class-validator';
 
 export class BotController {
     private server: ServerController;
@@ -59,6 +60,22 @@ export class BotController {
 
     private help = (): void => {
         if(this.message.channel.id === '946391539335192678'){ // restrict help command to help channel
+            const fields = CommandUsage.filter(command =>command.admin === false)
+            
+            const embed = createEmbed()
+                .setTitle('CTF Bot Commands')
+                .setDescription('To interact with CTF bot, use `-ctf` followed by any of the commands below.')
+                .addFields(fields.map((command) => 
+                    !command.admin && ({
+                    name: `\`${command.command}\``,
+                    value: command.description,
+                    inline: true,
+                    })
+                ));
+
+            this.message.channel.send(embed);
+        }
+        else if(this.message.channel.id === '946392199061442651') { // allow help command in create-challenges channel
             const embed = createEmbed()
                 .setTitle('CTF Bot Commands')
                 .setDescription('To interact with CTF bot, use `-ctf` followed by any of the commands below.')

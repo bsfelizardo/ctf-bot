@@ -40,43 +40,52 @@ export enum Command {
 };
 
 export const CommandUsage = [
-    // {
-    //     command: 'ping',
-    //     description: 'Check bot availability',
-    // },
-    // {
-    //     command: 'create <level> <title> <description>',
-    //     description: 'Create new CTF challenge',
-    // },
-    // {
-    //     command: 'set-flag <ctf-id> <flag>',
-    //     description: 'Set flag to a given challenge',
-    // },
+    {
+        command: 'ping',
+        description: 'Check bot availability',
+        admin: true,
+    },
+    {
+        command: 'create <level> <title> <description>',
+        description: 'Create new CTF challenge',
+        admin: true,
+    },
+    {
+        command: 'set-flag <ctf-id> <flag>',
+        description: 'Set flag to a given challenge',
+        admin: true,
+    },
     {
         command: 'help',
         description: 'Show this help message',
+        admin: false,
     },
     {
         command: 'info <ctf-id>',
         description: 'Show info on a given challenge',
+        admin: false,
     },
     {
         command: 'list',
         description: 'List CTF challenges',
+        admin: false,
     },
     {
         command: 'submit <ctf-id> <flag>',
         description: 'Submit flag, please enclose the flag with `||` to avoid revealing it to other users',
+        admin: false,
     },
     {
         command: 'leaderboard',
         description: 'Show leaderboard',
+        admin: false,
     },
     
-    // {
-    //     command: 'delete <ctf-id>',
-    //     description: 'Delete CTF challenge',
-    // },
+    {
+        command: 'delete <ctf-id>',
+        description: 'Delete CTF challenge',
+        admin: true,
+    },
     
 ];
 
