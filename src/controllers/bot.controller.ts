@@ -58,15 +58,23 @@ export class BotController {
     };
 
     private help = (): void => {
-        const embed = createEmbed()
-            .setTitle('CTF Bot Commands')
-            .setDescription('To interact with CTF bot, use `-ctf` followed by any of the commands below.')
-            .addFields(CommandUsage.map((command) => ({
-                name: `\`${command.command}\``,
-                value: command.description,
-                inline: true,
-            })));
+        if(this.message.channel.id === '946391539335192678'){ // restrict help command to help channel
+            const embed = createEmbed()
+                .setTitle('CTF Bot Commands')
+                .setDescription('To interact with CTF bot, use `-ctf` followed by any of the commands below.')
+                .addFields(CommandUsage.map((command) => ({
+                    name: `\`${command.command}\``,
+                    value: command.description,
+                    inline: true,
+                })));
 
-        this.message.channel.send(embed);
+            this.message.channel.send(embed);
+        }
+        else {
+            this.message.delete();
+            const { channel, author } = this.message;
+            channel.send(`${mention(author)} Use #help channel for the help command.`);            
+        }
+        
     }
 }
