@@ -60,20 +60,28 @@ export class ServerController extends BaseController {
     }
 
     getLeaderboard = async (): Promise<void> => {
-        const { channel } = this.message;
-        const leaderboard = await UserHandler.getLeaderboard(this.server);
-        
-        if (!leaderboard.length) {
-            channel.send('No data for leaderboard yet.');
-            return;
+        if(this.message.channel.id === '946391722890522626') { // #challenges-leaderboard channel id
+            const { channel } = this.message;
+            const leaderboard = await UserHandler.getLeaderboard(this.server);
+            
+            if (!leaderboard.length) {
+                channel.send('No data for leaderboard yet.');
+                return;
+            }
+            
+            const ranking = leaderboard.reduce((ranking, user, rank) => `${ranking}${rank + 1}. <@${user.userId}> (${user.score} pts.)\n`, '');
+            const embed = createEmbed()
+                .setTitle('Leaderboard')
+                .setDescription(ranking);
+
+            channel.send(embed);
         }
-
-        const ranking = leaderboard.reduce((ranking, user, rank) => `${ranking}${rank + 1}. <@${user.userId}> (${user.score} pts.)\n`, '');
-        const embed = createEmbed()
-            .setTitle('Leaderboard')
-            .setDescription(ranking);
-
-        channel.send(embed);
+        else {
+            this.message.delete();
+            const { channel, author } = this.message;
+            channel.send(`<@${this.message.author.id}> Use #challenges-leaderboard channel for the leaderboard command.`);            
+        }
+        
     }
 
     deleteUser = async(): Promise<void> => {
