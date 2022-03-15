@@ -6,7 +6,6 @@ import {
     User,
 } from '@models';
 import { createEmbed, toHex } from '@utils';
-import { mention } from '@utils/discord';
 import { BaseController } from './base.controller';
 
 export class ChallengeController extends BaseController {
@@ -97,7 +96,7 @@ export class ChallengeController extends BaseController {
         this.message.delete(); // delete flag immediately
 
         // if(this.message.channel.id === "822115248974331974"){
-        if(this.message.channel.id === '839500817216438322'){
+        if(this.message.channel.id === '946391966864793600'){ // #flag-submissions channel id
 
 
                 const args = this.getArgs(['id', 'flag']);
@@ -130,7 +129,7 @@ export class ChallengeController extends BaseController {
                     this.message.channel.send(error.message);
             }
         }else{
-            this.message.channel.send("You can only submit flag in the #flag-submssion");
+            this.message.channel.send(`<@${this.message.author.id}> Use #flag-submssion channel for submitting flags.`);
         }
     }
 
@@ -164,7 +163,7 @@ export class ChallengeController extends BaseController {
         else {
             this.message.delete();
             const { channel, author } = this.message;
-            channel.send(`${mention(author)} Use #ctf-challenges-info channel for the list command.`);            
+            channel.send(`<@${user.userId}> Use #ctf-challenges-info channel for the list command.`);            
         }
         
     }
