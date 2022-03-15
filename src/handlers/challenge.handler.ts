@@ -82,8 +82,8 @@ export class ChallengeHandler {
                     'answer',
                     'answer.userId = :userId',
                     { userId: user.id }
-                )
-                .andWhere('challenge.authorId != :userId', { userId: user.id });
+                );
+                // .andWhere('challenge.authorId != :userId', { userId: user.id });
         }
 
         const result = await query.getRawMany();
