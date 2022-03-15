@@ -6,6 +6,7 @@ import {
     User,
 } from '@models';
 import { createEmbed, toHex } from '@utils';
+import { mention } from '@utils/discord';
 import { BaseController } from './base.controller';
 
 export class ChallengeController extends BaseController {
@@ -149,15 +150,23 @@ export class ChallengeController extends BaseController {
             return;
         }
 
-        const list = challenges.reduce(
-            (list, challenge) => `${list}${toHex(challenge.id)}: ${challenge.title} (Level ${challenge.level}) ${challenge.solved ? '✅' : ''}\n`,
-            ''
-        );
-        const embed = createEmbed()
-            .setTitle(`List of CTF Challenges`)
-            .setDescription(`Challenges for you <@${user.userId}>:\n${list || 'No challenges for you.'}`);
-
-        this.message.channel.send(embed);
+        if(this.message.channel.id === '946391797679140904') { // #ctf-challenges-info id
+            const list = challenges.reduce(
+                (list, challenge) => `${list}${toHex(challenge.id)}: ${challenge.title} (Level ${challenge.level}) ${challenge.solved ? '✅' : ''}\n`,
+                ''
+            );
+            const embed = createEmbed()
+                .setTitle(`List of CTF Challenges`)
+                .setDescription(`Challenges for you <@${user.userId}>:\n${list || 'No challenges for you.'}`);
+    
+            this.message.channel.send(embed);
+        }
+        else {
+            this.message.delete();
+            const { channel, author } = this.message;
+            channel.send(`${mention(author)} Use #ctf-challenges-info channel for the list command.`);            
+        }
+        
     }
 
     delete = async (): Promise<void> => {
