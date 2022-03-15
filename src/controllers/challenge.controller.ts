@@ -189,9 +189,7 @@ export class ChallengeController extends BaseController {
     }
 
     info = async (): Promise<void> => {
-
-
-        if(this.message.channel.id === '817315859830931516'){
+        if(this.message.channel.id === '946391904898154506'){ // #ctf-info channel id
         
 
             const args = this.getArgs(['id']);
@@ -217,7 +215,9 @@ export class ChallengeController extends BaseController {
 
             this.message.channel.send(embed);
         }else{
-            this.message.channel.send('Command not allowed in this channel. Please do this in #ctf-info')
+            this.message.delete();
+            const { channel, author } = this.message;
+            channel.send(`<@${this.message.author.id}> Use #ctf-info channel for the info command.`);
         }
     }
 }
