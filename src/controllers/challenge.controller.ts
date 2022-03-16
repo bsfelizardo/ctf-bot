@@ -96,7 +96,7 @@ export class ChallengeController extends BaseController {
         this.message.delete(); // delete flag immediately
 
         // if(this.message.channel.id === "822115248974331974"){
-        if(this.message.channel.id === '839500817216438322'){
+        if(this.message.channel.id === '946391966864793600'){ // #flag-submissions channel id
 
 
                 const args = this.getArgs(['id', 'flag']);
@@ -129,7 +129,7 @@ export class ChallengeController extends BaseController {
                     this.message.channel.send(error.message);
             }
         }else{
-            this.message.channel.send("You can only submit flag in the #flag-submssion");
+            this.message.channel.send(`<@${this.message.author.id}> Use #flag-submssion channel for submitting flags.`);
         }
     }
 
@@ -149,15 +149,23 @@ export class ChallengeController extends BaseController {
             return;
         }
 
-        const list = challenges.reduce(
-            (list, challenge) => `${list}${toHex(challenge.id)}: ${challenge.title} (Level ${challenge.level}) ${challenge.solved ? '✅' : ''}\n`,
-            ''
-        );
-        const embed = createEmbed()
-            .setTitle(`List of CTF Challenges`)
-            .setDescription(`Challenges for you <@${user.userId}>:\n${list || 'No challenges for you.'}`);
-
-        this.message.channel.send(embed);
+        if(this.message.channel.id === '946391797679140904') { // #ctf-challenges-info id
+            const list = challenges.reduce(
+                (list, challenge) => `${list}${toHex(challenge.id)}: ${challenge.title} (Level ${challenge.level}) ${challenge.solved ? '✅' : ''}\n`,
+                ''
+            );
+            const embed = createEmbed()
+                .setTitle(`List of CTF Challenges`)
+                .setDescription(`Challenges for you <@${user.userId}>:\n${list || 'No challenges for you.'}`);
+    
+            this.message.channel.send(embed);
+        }
+        else {
+            this.message.delete();
+            const { channel, author } = this.message;
+            channel.send(`<@${user.userId}> Use #ctf-challenges-info channel for the list command.`);            
+        }
+        
     }
 
     delete = async (): Promise<void> => {
@@ -181,9 +189,7 @@ export class ChallengeController extends BaseController {
     }
 
     info = async (): Promise<void> => {
-
-
-        if(this.message.channel.id === '817315859830931516'){
+        if(this.message.channel.id === '946391904898154506'){ // #ctf-info channel id
         
 
             const args = this.getArgs(['id']);
@@ -209,7 +215,9 @@ export class ChallengeController extends BaseController {
 
             this.message.channel.send(embed);
         }else{
-            this.message.channel.send('Command not allowed in this channel. Please do this in #ctf-info')
+            this.message.delete();
+            const { channel, author } = this.message;
+            channel.send(`<@${this.message.author.id}> Use #ctf-info channel for the info command.`);
         }
     }
 }

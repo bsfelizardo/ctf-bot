@@ -82,8 +82,8 @@ export class ChallengeHandler {
                     'answer',
                     'answer.userId = :userId',
                     { userId: user.id }
-                )
-                .andWhere('challenge.authorId != :userId', { userId: user.id });
+                );
+                // .andWhere('challenge.authorId != :userId', { userId: user.id });
         }
 
         const result = await query.getRawMany();
@@ -103,9 +103,9 @@ export class ChallengeHandler {
          * 7th to 15th: 80% score
          * 16th and beyod: 70% score
          */
-        const tiers = [1, 3, 7, 15, Infinity];
+        const tiers = [1, 2, 3, 5, 6, Infinity];
         // const multipliers = [1, 0.9, 0.8, 0.7];
-        const multipliers = [1, 0.9, 0.8, 0.7, 0.5];
+        const multipliers = [1, 0.9, 0.8, 0.7, 0.6, 0.5];
 
         const solverTier = tiers.findIndex(tier => solvers < tier);
         return Math.floor(multipliers[solverTier] * basePoint);
