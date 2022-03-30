@@ -149,7 +149,7 @@ export class ChallengeController extends BaseController {
             return;
         }
 
-        if(this.message.channel.id === '946391797679140904') { // #ctf-challenges-info id
+        if(this.message.channel.id === '939727506976677920') { // #ctf-challenges-info id
             const list = challenges.reduce(
                 (list, challenge) => `${list}${toHex(challenge.id)}: ${challenge.title} (Level ${challenge.level}) ${challenge.solved ? '✅' : ''}\n`,
                 ''
