@@ -59,7 +59,7 @@ export class BotController {
     };
 
     private help = (): void => {
-        if(this.message.channel.id === '946391539335192678'){ // restrict help command to help channel
+        if(this.message.channel.id === '939727443105828904'){ // restrict help command to help channel
             const fields = CommandUsage.filter(command =>command.admin === false)
             
             const embed = createEmbed()
