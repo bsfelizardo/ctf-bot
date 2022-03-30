@@ -60,7 +60,7 @@ export class ServerController extends BaseController {
     }
 
     getLeaderboard = async (): Promise<void> => {
-        if(this.message.channel.id === '946391722890522626') { // #challenges-leaderboard channel id
+        if(this.message.channel.id === '939727478203764746') { // #challenges-leaderboard channel id
             const { channel } = this.message;
             const leaderboard = await UserHandler.getLeaderboard(this.server);
             
