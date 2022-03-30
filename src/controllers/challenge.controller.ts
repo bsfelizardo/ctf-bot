@@ -189,7 +189,7 @@ export class ChallengeController extends BaseController {
     }
 
     info = async (): Promise<void> => {
-        if(this.message.channel.id === '946391904898154506'){ // #ctf-info channel id
+        if(this.message.channel.id === '939727533090426891'){ // #ctf-info channel id
         
 
             const args = this.getArgs(['id']);
