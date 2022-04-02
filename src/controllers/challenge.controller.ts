@@ -16,7 +16,7 @@ export class ChallengeController extends BaseController {
             'description',
         ]);
 
-        if(this.message.member.roles.cache.some(role => role.name === "Admin")){
+        if(this.message.member.roles.cache.some(role => role.name === "CTF Facilitator")){
 
         const author = await User.registerOrFindOne(this.message.author.id, this.server);
 
