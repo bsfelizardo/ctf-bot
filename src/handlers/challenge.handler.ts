@@ -2,7 +2,7 @@ import { Answer, Challenge, User, Server } from '@models';
 import { BotError, ErrorCode } from '../errors';
 
 export class ChallengeHandler {
-    static readonly FLAG_REGEX = /^flag\{[A-Za-z0-9_]+\}$/;
+    static readonly FLAG_REGEX = /^flag\{[A-Za-z0-9_'\s]+\}$/;
 
     static create = async (
         level: number,

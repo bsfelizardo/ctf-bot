@@ -16,7 +16,7 @@ export class ChallengeController extends BaseController {
             'description',
         ]);
 
-        if(this.message.member.roles.cache.some(role => role.name === "Admin")){
+        if(this.message.member.roles.cache.some(role => role.name === "CTF Facilitator")){
 
         const author = await User.registerOrFindOne(this.message.author.id, this.server);
 
@@ -96,7 +96,7 @@ export class ChallengeController extends BaseController {
         this.message.delete(); // delete flag immediately
 
         // if(this.message.channel.id === "822115248974331974"){
-        if(this.message.channel.id === '946391966864793600'){ // #flag-submissions channel id
+        if(this.message.channel.id === '939727559162208316'){ // #flag-submissions channel id
 
 
                 const args = this.getArgs(['id', 'flag']);
@@ -149,7 +149,7 @@ export class ChallengeController extends BaseController {
             return;
         }
 
-        if(this.message.channel.id === '946391797679140904') { // #ctf-challenges-info id
+        if(this.message.channel.id === '939727506976677920') { // #ctf-challenges-info id
             const list = challenges.reduce(
                 (list, challenge) => `${list}${toHex(challenge.id)}: ${challenge.title} (Level ${challenge.level}) ${challenge.solved ? '✅' : ''}\n`,
                 ''
@@ -189,7 +189,7 @@ export class ChallengeController extends BaseController {
     }
 
     info = async (): Promise<void> => {
-        if(this.message.channel.id === '946391904898154506'){ // #ctf-info channel id
+        if(this.message.channel.id === '939727533090426891'){ // #ctf-info channel id
         
 
             const args = this.getArgs(['id']);

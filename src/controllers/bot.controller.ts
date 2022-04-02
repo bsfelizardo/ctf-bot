@@ -59,7 +59,7 @@ export class BotController {
     };
 
     private help = (): void => {
-        if(this.message.channel.id === '946391539335192678'){ // restrict help command to help channel
+        if(this.message.channel.id === '939727443105828904'){ // restrict help command to help channel
             const fields = CommandUsage.filter(command =>command.admin === false)
             
             const embed = createEmbed()
@@ -75,7 +75,7 @@ export class BotController {
 
             this.message.channel.send(embed);
         }
-        else if(this.message.channel.id === '946392199061442651') { // allow help command in create-challenges channel
+        else if(this.message.channel.id === '954015176955408414') { // allow help command in create-challenges channel
             const embed = createEmbed()
                 .setTitle('CTF Bot Commands')
                 .setDescription('To interact with CTF bot, use `-ctf` followed by any of the commands below.')

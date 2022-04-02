@@ -46,13 +46,13 @@ export const CommandUsage = [
         admin: true,
     },
     {
-        command: 'create <level> <title> <description>',
+        command: 'create <level> \"<title\"> \"<description>\"',
         description: 'Create new CTF challenge',
         admin: true,
     },
     {
-        command: 'set-flag <ctf-id> <flag>',
-        description: 'Set flag to a given challenge',
+        command: 'set-flag <ctf-id> \"<flag>\"',
+        description: 'Set flag to a given challenge.',
         admin: true,
     },
     {
@@ -71,8 +71,8 @@ export const CommandUsage = [
         admin: false,
     },
     {
-        command: 'submit <ctf-id> <flag>',
-        description: 'Submit flag, please enclose the flag with `||` to avoid revealing it to other users',
+        command: 'submit <ctf-id> \"<flag>\"',
+        description: 'Submit flag, please enclose the flag with `||` to avoid revealing it to other users. Example: -ctf submit 0x00000 ||\"flag{sample}\"||',
         admin: false,
     },
     {

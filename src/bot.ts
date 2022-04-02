@@ -23,8 +23,8 @@ class CtfBot {
         this.client.on('message', (message: Message) => {
             const pattern = new RegExp(`^${CtfBot.NAMESPACE} ((.|\\n)+)`);
             const flag_pattern = new RegExp(`${CtfBot.FLAG}`);
-            const authorId = '950559299657146378';  //bot id for PB server
-            // const authorId = '811948960393723914'; //bot id for YSES Week Server
+            // const authorId = '950559299657146378';  //bot id for PB server
+            const authorId = '958537098619650098'; //bot id for YSES Week Server
             
      
             if ( !pattern.test(message.content) && flag_pattern.test(message.content) && authorId !== message.author.id){
