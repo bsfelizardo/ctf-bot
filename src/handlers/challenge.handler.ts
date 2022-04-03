@@ -72,7 +72,7 @@ export class ChallengeHandler {
             .select('challenge')
             .where('challenge.serverId = :serverId', { serverId: server.id })
             .andWhere('challenge.flag IS NOT NULL')
-            .orderBy('challenge.id');
+            .orderBy('challenge.level');
 
         if (user) {
             query = query
