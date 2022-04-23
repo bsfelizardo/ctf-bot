@@ -28,7 +28,7 @@ class CtfBot {
             
             
             if (!pattern.test(message.content)) { // message not a bot command
-                if(flag_pattern.test(message.content) && !message.member.roles.cache.some(role => role.name === "YSER")) {   // message contains the word flag and is not from a YSER
+                if(flag_pattern.test(message.content) && !message.member.roles.cache.some(role => role.name === "YSER") && authorId !== message.author.id) {   // message contains the word flag, is not from a YSER, and is not from the bot
                     message.delete();
                 }
                 return;
