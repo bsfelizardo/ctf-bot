@@ -26,13 +26,13 @@ class CtfBot {
             // const authorId = '950559299657146378';  //bot id for PB server
             const authorId = '958537098619650098'; //bot id for YSES Week Server
             
-     
-            if ( !pattern.test(message.content) && flag_pattern.test(message.content) && authorId !== message.author.id){
-                message.delete();
+            
+            if (!pattern.test(message.content)) { // message not a bot command
+                if(flag_pattern.test(message.content) && message.member.roles.cache.some(role => role.name === "YSER")) {   // message contains the word flag and is not from a YSER
+                    message.delete();
+                }
                 return;
             }
-
-            if (!pattern.test(message.content)) return;
             
 
             const [, text] = message.content.match(pattern);
