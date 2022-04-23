@@ -16,7 +16,7 @@ export class Challenge extends DefaultEntity {
     flag: string;
 
     @Column()
-    @Min(1)
+    @Min(0)
     @Max(5)
     level: number;
 
@@ -37,8 +37,8 @@ export class Challenge extends DefaultEntity {
 
     getBasePoint(): number {
         // const points = [10, 25, 50, 80, 100];
-        const points = [70, 140, 210, 280];
-        return points[this.level - 1];
+        const points = [0, 70, 140, 210, 280];
+        return points[this.level];
     }
 
     static async getByGuild(challengeId: number, guildId: string): Promise<Challenge> {
